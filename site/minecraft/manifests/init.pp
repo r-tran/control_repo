@@ -1,6 +1,6 @@
 class minecraft {
   include profile::base
-  $minecraft_directory = "opt/minecraft"
+  $minecraft_directory = "/opt/minecraft"
 
   file { $minecraft_directory:
     ensure => 'directory',
