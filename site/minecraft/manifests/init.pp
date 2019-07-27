@@ -7,7 +7,7 @@ class minecraft {
     ensure => 'directory',
   }
 
-  file { "${minecraft_directory}/minecraft_server_jar":
+  file { "${minecraft_directory}/minecraft_server.jar":
     ensure => file,   
     source => $jar_location
   }
