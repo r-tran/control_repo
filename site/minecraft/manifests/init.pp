@@ -12,6 +12,11 @@ class minecraft {
     source => $jar_location
   }
 
+  file { '/etc/systemd/system/minecraft_server.service':
+    ensure  => file,
+    content => epp('minecraft/minecraft_server.epp'),
+  }
+
   package {'java':
     ensure => installed,
   }
