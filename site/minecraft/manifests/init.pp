@@ -17,11 +17,18 @@ class minecraft {
     content => epp('minecraft/minecraft_server.epp'),
   }
 
+  file { "${minecraft_directory}/eula.txt":
+    ensure => file,
+    content => "yes",
+  }
+
   package {'java':
     ensure => installed,
   }
   service { 'minecraft_server.service':
     ensure => running,
-    require => [File['/etc/systemd/system/minecraft_server.service'], File["${minecraft_directory}/minecraft_server.jar"]]
+    require => [File['/etc/systemd/system/minecraft_server.service'],
+      File["${minecraft_directory}/minecraft_server.jar"],
+      File["${minecraft_directory}/eula.txt"]]
   }
 }
