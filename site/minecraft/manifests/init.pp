@@ -24,7 +24,7 @@ class minecraft {
 
   file { '/etc/systemd/system/minecraft_server.service':
     ensure  => file,
-    content => epp('../templates/minecraft_server.epp'),
+    content => epp('minecraft/templates/minecraft_server.epp'),
   }
 
   service { 'minecraft_server.service':
