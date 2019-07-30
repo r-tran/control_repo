@@ -11,4 +11,8 @@ class minecraft {
     ensure => file,   
     source => $jar_location
   }
+
+  package {'java':
+    ensure => installed,
+  }
 }
