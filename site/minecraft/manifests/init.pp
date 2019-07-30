@@ -10,7 +10,8 @@ class minecraft {
 
   file { "${minecraft_directory}/minecraft_server.jar":
     ensure => file,   
-    source => $jar_location
+    source => $jar_location,
+    before => Service['minecraft_server'],
   }
 
   package {'java':
@@ -27,11 +28,13 @@ class minecraft {
     content => epp('minecraft/minecraft_server.epp'),
   }
 
-  service { 'minecraft_server.service':
+  service { 'minecraft_server':
     ensure => running,
     enable => true,
-    require => [File['/etc/systemd/system/minecraft_server.service'],
+    require => [
+      Package['java'],
+      File['/etc/systemd/system/minecraft_server.service'],
       File["${minecraft_directory}/minecraft_server.jar"],
-      File["${minecraft_directory}/eula.txt"]]
+      File["${minecraft_directory}/eula.txt"]],
   }
 }
