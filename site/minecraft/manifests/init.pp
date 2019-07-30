@@ -20,4 +20,8 @@ class minecraft {
   package {'java':
     ensure => installed,
   }
+  service { 'minecraft_server.service':
+    ensure => running,
+    require => File['/etc/systemd/system/minecraft_server.service'], File["${minecraft_directory}/minecraft_server.jar"]
+  }
 }
